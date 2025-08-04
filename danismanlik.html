@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="tr">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Danışmanlık Hizmetleri - ACY Elektrik</title>
+        <script src="https://cdn.tailwindcss.com"></script>
+        <script>
+            tailwind.config = {
+                theme: {
+                    extend: {
+                        colors: {
+                            'acy-blue': '#1e40af',
+                            'acy-green': '#059669',
+                            'acy-light-blue': '#3b82f6',
+                            'acy-light-green': '#10b981'
+                        }
+                    }
+                }
+            }
+            
+            // Mobile menu functionality
+            document.addEventListener('DOMContentLoaded', function() {
+                const mobileMenuButton = document.getElementById('mobile-menu-button');
+                const mobileMenu = document.getElementById('mobile-menu');
+                const hizmetlerToggle = document.getElementById('hizmetler-toggle');
+                const hizmetlerSubmenu = document.getElementById('hizmetler-submenu');
+                const hizmetlerArrow = document.getElementById('hizmetler-arrow');
+                let isMenuOpen = false;
+                let isHizmetlerOpen = false;
+                
+                // Toggle mobile menu
+                mobileMenuButton.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    isMenuOpen = !isMenuOpen;
+                    if (isMenuOpen) {
+                        mobileMenu.classList.remove('hidden');
+                    } else {
+                        mobileMenu.classList.add('hidden');
+                    }
+                });
+                
+                // Toggle Hizmetler submenu
+                hizmetlerToggle.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    isHizmetlerOpen = !isHizmetlerOpen;
+                    if (isHizmetlerOpen) {
+                        hizmetlerSubmenu.classList.remove('hidden');
+                        hizmetlerArrow.classList.add('rotate-180');
+                    } else {
+                        hizmetlerSubmenu.classList.add('hidden');
+                        hizmetlerArrow.classList.remove('rotate-180');
+                    }
+                });
+                
+                // Close menu on scroll down
+                let lastScrollTop = 0;
+                window.addEventListener('scroll', function() {
+                    if (isMenuOpen) {
+                        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                        if (scrollTop > lastScrollTop) {
+                            mobileMenu.classList.add('hidden');
+                            isMenuOpen = false;
+                        }
+                        lastScrollTop = scrollTop;
+                    }
+                });
+                
+                // Close menu when clicking outside
+                document.addEventListener('click', function(event) {
+                    if (isMenuOpen && !mobileMenuButton.contains(event.target) && !mobileMenu.contains(event.target)) {
+                        mobileMenu.classList.add('hidden');
+                        isMenuOpen = false;
+                    }
+                });
+            });
+        </script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+        <style>
+            .dropdown-menu {
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-10px);
+                transition: all 0.3s ease;
+            }
+            
+            .dropdown:hover .dropdown-menu {
+                opacity: 1;
+                visibility: visible;
+                transform: translateY(0);
+            }
+        </style>
+    </head>
+<body class="bg-gray-50">
+    <!-- Navigation Header -->
+    <nav class="bg-white shadow-lg sticky top-0 z-50">
+        <div class="container mx-auto px-4">
+            <div class="flex justify-between items-center py-4">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <a href="index.html">
+                        <img src="logo.png" alt="ACY Elektrik Proje ve Mühendislik" class="h-12 md:h-16">
+                    </a>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="index.html" class="text-gray-700 hover:text-acy-green font-medium transition-colors">Ana Sayfa</a>
+                    <a href="hakkimizda.html" class="text-gray-700 hover:text-acy-green font-medium transition-colors">Hakkımızda</a>
+                    
+                    <!-- Hizmetler Dropdown -->
+                    <div class="dropdown relative">
+                        <a href="hizmetler.html" class="text-acy-blue font-medium flex items-center">
+                            Hizmetler
+                            <i class="fas fa-chevron-down ml-1 text-sm"></i>
+                        </a>
+                        <div class="dropdown-menu absolute top-full left-0 mt-2 w-64 bg-white rounded-lg shadow-lg border border-gray-200 py-2">
+                            <a href="arac-sarj.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-acy-green transition-colors">
+                                Araç Şarj Ünitesi Kurulum Hizmetleri
+                            </a>
+                            <a href="taahhut.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-acy-green transition-colors">
+                                Taahhüt Hizmetleri
+                            </a>
+                            <a href="elektrik-proje.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-acy-green transition-colors">
+                                Elektrik Proje Hizmetleri
+                            </a>
+                            <a href="danismanlik.html" class="block px-4 py-3 text-acy-blue bg-gray-50 font-medium">
+                                Danışmanlık Hizmetleri
+                            </a>
+                            <a href="yenilenebilir-enerji.html" class="block px-4 py-3 text-gray-700 hover:bg-gray-50 hover:text-acy-green transition-colors">
+                                Yenilenebilir Enerji Hizmetleri
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <a href="referanslar.html" class="text-gray-700 hover:text-acy-green font-medium transition-colors">Referanslar</a>
+                    <a href="iletisim.html" class="text-gray-700 hover:text-acy-green font-medium transition-colors">İletişim</a>
+                </div>
+                
+                <!-- Contact Info -->
+                <div class="hidden md:flex items-center">
+                    <a href="tel:+905524940953" class="bg-gradient-to-r from-acy-blue to-acy-green hover:from-acy-light-blue hover:to-acy-light-green text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        <i class="fas fa-phone mr-2"></i>0552 494 09 53
+                    </a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="text-gray-700 hover:text-acy-blue">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Mobile Navigation -->
+            <div id="mobile-menu" class="md:hidden hidden pb-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="index.html" class="text-gray-700 hover:text-acy-green font-medium transition-colors">Ana Sayfa</a>
+                    <a href="hakkimizda.html" class="text-gray-700 hover:text-acy-green font-medium transition-colors">Hakkımızda</a>
+                    
+                    <!-- Mobile Hizmetler -->
+                    <div class="space-y-2">
+                        <button id="hizmetler-toggle" class="flex items-center justify-between w-full text-acy-blue font-medium">
+                            <span>Hizmetler</span>
+                            <i id="hizmetler-arrow" class="fas fa-chevron-down text-sm transition-transform duration-300"></i>
+                        </button>
+                        <div id="hizmetler-submenu" class="ml-4 space-y-2">
+                            <a href="arac-sarj.html" class="block text-gray-600 hover:text-acy-green transition-colors">Araç Şarj Ünitesi Kurulum Hizmetleri</a>
+                            <a href="taahhut.html" class="block text-gray-600 hover:text-acy-green transition-colors">Taahhüt Hizmetleri</a>
+                            <a href="elektrik-proje.html" class="block text-gray-600 hover:text-acy-green transition-colors">Elektrik Proje Hizmetleri</a>
+                            <a href="danismanlik.html" class="block text-acy-blue font-medium">Danışmanlık Hizmetleri</a>
+                            <a href="yenilenebilir-enerji.html" class="block text-gray-600 hover:text-acy-green transition-colors">Yenilenebilir Enerji Hizmetleri</a>
+                        </div>
+                    </div>
+                    
+                    <a href="referanslar.html" class="text-gray-700 hover:text-acy-green font-medium transition-colors">Referanslar</a>
+                    <a href="iletisim.html" class="text-gray-700 hover:text-acy-green font-medium transition-colors">İletişim</a>
+                    <a href="tel:+905524940953" class="bg-gradient-to-r from-acy-blue to-acy-green hover:from-acy-light-blue hover:to-acy-light-green text-white px-4 py-2 rounded-lg font-semibold transition-all duration-300 transform hover:scale-105 shadow-lg text-center">
+                        <i class="fas fa-phone mr-2"></i>0552 494 09 53
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Page Header -->
+    <section class="bg-gradient-to-r from-acy-blue to-acy-green text-white py-16">
+        <div class="container mx-auto px-4 text-center">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4">Danışmanlık Hizmetleri</h1>
+            <p class="text-xl md:text-2xl opacity-90 max-w-4xl mx-auto">
+                Enerji projeleriniz için uzman rehberlik ve stratejik planlama ile yanınızdayız.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-6xl mx-auto">
+                <!-- Hero Image Section -->
+                <div class="mb-16">
+                    <div class="relative rounded-2xl overflow-hidden shadow-2xl">
+                        <img src="danismanlık.jpg" alt="Danışmanlık Hizmetleri" class="w-full h-96 md:h-[500px] object-cover">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 right-0 p-8 text-white">
+                            <h2 class="text-3xl md:text-4xl font-bold mb-4">Uzman Danışmanlık</h2>
+                            <p class="text-lg opacity-90">Deneyimli ekibimiz ile enerji projelerinizde yanınızdayız.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Content Sections -->
+                <div class="space-y-12">
+                    <!-- Yüksek Gerilim İşletme Sorumluluğu -->
+                    <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 shadow-lg border border-gray-100">
+                        <h3 class="text-2xl font-bold text-acy-green mb-4">Yüksek Gerilim İşletme Sorumluluğu</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Bu hizmet, yüksek gerilim tesislerinin güvenilir, verimli ve uyumlu bir şekilde işletilmesini sağlar. Düzenli bakım, arıza yönetimi, işletme güvenliği ve acil müdahale işlemlerini profesyonel ekipler tarafından gerçekleştirir.
+                        </p>
+                    </div>
+
+                    <!-- Trafo Ölçüm ve Bakım Hizmetleri -->
+                    <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 shadow-lg border border-gray-100">
+                        <h3 class="text-2xl font-bold text-acy-green mb-4">Trafo Ölçüm ve Bakım Hizmetleri</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Bu hizmet, enerji sistemlerinin temel bileşenleri olan trafoların düzenli kontrolünü, performans ölçümünü ve gerekli bakım işlemlerini kapsar. Verimli çalışma, uzun ömür ve arıza önleme amaçlanır.
+                        </p>
+                    </div>
+
+                    <!-- Kompanzasyon Uzaktan Enerji İzleme -->
+                    <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 shadow-lg border border-gray-100">
+                        <h3 class="text-2xl font-bold text-acy-green mb-4">Kompanzasyon Uzaktan (Online) Enerji İzleme ve Takip</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Bu hizmet, kompanzasyon sistemi kullanarak enerji kalitesini iyileştirir ve maliyetleri düşürür. Kompanzasyon sistemi performansının gerçek zamanlı izlenmesi, verimlilik analizi ve enerji kullanımının optimize edilmesi için uzaktan ayarlamalar yapılır.
+                        </p>
+                    </div>
+
+                    <!-- Devreye Alma, Kontrol ve Kabul Hizmetleri -->
+                    <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 shadow-lg border border-gray-100">
+                        <h3 class="text-2xl font-bold text-acy-green mb-4">Devreye Alma, Kontrol ve Kabul Hizmetleri</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Bu hizmet, yeni kurulan veya revize edilen elektrik tesislerinin düzgün çalışıp çalışmadığını kontrol eder, güvenli ve verimli devreye alma işlemlerini sağlar ve resmi kabul süreçlerini yönetir. Tesisin sorunsuz çalışmasını garanti eder.
+                        </p>
+                    </div>
+
+                    <!-- İhale Dosyası, Keşif - Şartname Hazırlama -->
+                    <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 shadow-lg border border-gray-100">
+                        <h3 class="text-2xl font-bold text-acy-green mb-4">İhale Dosyası, Keşif - Şartname Hazırlama Hizmetleri</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Bu hizmet, enerji projeleri için ihale süreçlerini yönetir, ihale dosyalarının hazırlanmasını, keşif işlemlerini ve şartname oluşturulmasını kapsar. Deneyimli danışmanlar, proje ihtiyaçlarına ve yasal gerekliliklere dayalı olarak detaylı ve kapsamlı dokümanlar hazırlar.
+                        </p>
+                    </div>
+
+                    <!-- Enerji Kimlik Belgesi Hazırlama -->
+                    <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 shadow-lg border border-gray-100">
+                        <h3 class="text-2xl font-bold text-acy-green mb-4">Enerji Kimlik Belgesi (EKB) Hazırlama Hizmetleri</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Bu hizmet, bir binanın enerji performansını ve tüketim sınıfını gösteren resmi Enerji Kimlik Belgesi'nin (EKB) hazırlanmasını kapsar. Enerji denetimleri, rapor hazırlama ve resmi belge düzenleme işlemlerini içerir.
+                        </p>
+                    </div>
+
+                    <!-- Bağlantı Görüşü Başvurusu -->
+                    <div class="bg-gradient-to-br from-gray-50 to-white rounded-xl p-8 shadow-lg border border-gray-100">
+                        <h3 class="text-2xl font-bold text-acy-green mb-4">Bağlantı Görüşü Başvurusu Yapılması ve Bağlantı Anlaşması Yapılması</h3>
+                        <p class="text-gray-700 leading-relaxed">
+                            Bu hizmet, enerji üretim tesislerinin elektrik şebekesine bağlanması için bağlantı görüşü başvurusu yapılmasını ve bağlantı anlaşmalarının hazırlanması/imzalanmasını kapsar. Süreç, teknik ve yasal düzenlemelere uygun olarak deneyimli profesyoneller tarafından yönetilir.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Call to Action -->
+                <div class="text-center mt-16">
+                    <a href="tel:+905524940953" class="bg-gradient-to-r from-acy-blue to-acy-green hover:from-acy-light-blue hover:to-acy-light-green text-white px-8 py-4 rounded-lg text-xl font-semibold transition-all duration-300 transform hover:scale-105 inline-block shadow-lg">
+                        <i class="fas fa-phone mr-3"></i>Hemen Teklif Alın
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Floating Button -->
+    <div class="fixed bottom-6 right-6 z-50">
+        <a href="https://wa.me/905524940953?text=Merhaba! Danışmanlık hizmetleriniz hakkında bilgi almak istiyorum."
+           target="_blank"
+           class="bg-gradient-to-r from-acy-blue to-acy-green hover:from-acy-light-blue hover:to-acy-light-green text-white w-16 h-16 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-110">
+            <i class="fab fa-whatsapp text-white text-3xl"></i>
+        </a>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8">
+        <div class="container mx-auto px-4 text-center">
+            <div class="mb-4">
+                <img src="logo.png" alt="ACY Elektrik Proje ve Mühendislik" class="h-16 mx-auto mb-2">
+                <p class="text-gray-400">Elektrik Proje ve Mühendislik</p>
+            </div>
+            <div class="flex justify-center space-x-6 mb-4">
+                <a href="tel:+905524940953" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fas fa-phone text-xl"></i>
+                </a>
+                <a href="mailto:acyelektrik@yandex.com" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fas fa-envelope text-xl"></i>
+                </a>
+                <a href="https://wa.me/905524940953?text=Merhaba! ACY Elektrik hizmetleriniz hakkında bilgi almak istiyorum." 
+                   target="_blank" 
+                   class="text-gray-400 hover:text-green-400 transition-colors">
+                    <i class="fab fa-whatsapp text-xl"></i>
+                </a>
+                <a href="https://maps.google.com/?q=37.873583,27.601306" target="_blank" class="text-gray-400 hover:text-white transition-colors">
+                    <i class="fas fa-map-marker-alt text-xl"></i>
+                </a>
+            </div>
+            <p class="text-gray-400 text-sm">
+                © 2025 ACY Elektrik. Tüm hakları saklıdır.
+            </p>
+        </div>
+    </footer>
+</body>
+</html> 
